@@ -1,5 +1,6 @@
 <template>
   <ButtonWrapper @click="$emit('click')" :type="type" :color="color">
+    <mdicon v-if="icon !== null" :name="icon" />
     {{ text }}
   </ButtonWrapper>
 </template>
@@ -24,6 +25,10 @@ export default {
     type: {
       type: String,
       default: "button",
+    },
+    icon: {
+      type: String,
+      default: null,
     },
   },
 };

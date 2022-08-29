@@ -4,11 +4,20 @@
 
     <CForm v-model="formTask" @submit="addTask" />
 
-    <CCard v-for="task in tasks" :key="task.id" :task="task">
-      <template v-slot:actions>
-        <CButton @click="removeTask(task.id)" text="Apagar" />
-      </template>
-    </CCard>
+    <div v-if="tasks.length > 0">
+      <h3>Suas tarefas</h3>
+
+      <CCard v-for="task in tasks" :key="task.id" :task="task">
+        <template v-slot:actions>
+          <CButton
+            icon="trash-can-outline"
+            @click="removeTask(task.id)"
+            text="Apagar"
+            color="danger"
+          />
+        </template>
+      </CCard>
+    </div>
   </div>
 </template>
 

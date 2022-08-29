@@ -1,37 +1,46 @@
 <template>
-  <form @submit.prevent="$emit('submit')">
-    <input
+  <FormWrapper @submit.prevent="$emit('submit')">
+    <FormTitle>Nova tarefa</FormTitle>
+
+    <InputWrapper
       placeholder="Descrição"
       :value="value.description"
-      @input="(event) => input(event.target.value, 'description')"
+      @input="(v) => input(v, 'description')"
+      required
     />
 
-    <input
+    <InputWrapper
       type="date"
       placeholder="Data"
       :value="value.date"
-      @input="(event) => input(event.target.value, 'date')"
+      @input="(v) => input(v, 'date')"
+      required
     />
 
-    <input
+    <InputWrapper
       type="time"
       placeholder="Hora"
       :value="value.hour"
-      @input="(event) => input(event.target.value, 'hour')"
+      @input="(v) => input(v, 'hour')"
+      required
     />
 
-    <CButton type="submit" text="Adicionar" />
-  </form>
+    <CButton type="submit" icon="plus" text="Adicionar" />
+  </FormWrapper>
 </template>
 
 <script>
 import CButton from "../Button";
+import { FormWrapper, InputWrapper, FormTitle } from "./style";
 
 export default {
   name: "CForm",
 
   components: {
     CButton,
+    FormWrapper,
+    InputWrapper,
+    FormTitle,
   },
 
   props: {
