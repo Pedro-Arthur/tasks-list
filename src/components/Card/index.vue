@@ -1,13 +1,10 @@
 <template>
   <CardWrapper>
-    <CardLine>
-      <mdicon name="pencil-outline" />
-      <p>Descrição: {{ task.description }}</p>
-    </CardLine>
+    <CardTitle>{{ task.description }}</CardTitle>
 
     <CardLine>
       <mdicon name="calendar" />
-      <p>Data: {{ task.date }}</p>
+      <p>Data: {{ formattedDate }}</p>
     </CardLine>
 
     <CardLine>
@@ -20,7 +17,7 @@
 </template>
 
 <script>
-import { CardWrapper, CardLine } from "./style";
+import { CardWrapper, CardLine, CardTitle } from "./style";
 
 export default {
   name: "CCard",
@@ -28,6 +25,16 @@ export default {
   components: {
     CardWrapper,
     CardLine,
+    CardTitle,
+  },
+
+  computed: {
+    formattedDate() {
+      if (typeof this.task.date !== "string") {
+        return this.task.date;
+      }
+      return this.task.date.split("-").reverse().join("/");
+    },
   },
 
   props: {

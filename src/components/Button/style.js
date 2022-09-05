@@ -13,5 +13,6 @@ export const ButtonWrapper = styled("button", btnProps)`
 
   &:hover {
     cursor: pointer;
+    background-color: ${({ theme, color }) => theme.colors[`dark_${color}`]};
   }
 `;

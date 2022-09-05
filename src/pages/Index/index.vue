@@ -1,12 +1,20 @@
 <template>
-  <div>
-    <h1>Tarefas</h1>
+  <Container>
+    <Header>
+      <h1>Tarefas</h1>
+      <CButton
+        icon="plus"
+        @click="visibleModal = true"
+        text="Adicionar"
+        color="primary"
+      />
+    </Header>
 
-    <CForm v-model="formTask" @submit="addTask" />
+    <CModal v-if="visibleModal" @close="closeModal" title="Adicionar tarefa">
+      <CForm v-model="formTask" @submit="addTask" />
+    </CModal>
 
-    <div v-if="tasks.length > 0">
-      <h3>Suas tarefas</h3>
-
+    <TaskContent v-if="tasks.length > 0">
       <CCard v-for="task in tasks" :key="task.id" :task="task">
         <template v-slot:actions>
           <CButton
@@ -17,14 +25,17 @@
           />
         </template>
       </CCard>
-    </div>
-  </div>
+    </TaskContent>
+    <p v-else>Sem tarefas cadastradas...</p>
+  </Container>
 </template>
 
 <script>
-import CButton from "../components/Button";
-import CCard from "../components/Card";
-import CForm from "../components/Form";
+import CButton from "../../components/Button";
+import CCard from "../../components/Card";
+import CForm from "../../components/Form";
+import CModal from "../../components/Modal";
+import { Header, TaskContent, Container } from "./style";
 
 const defaultFormTask = {
   id: null,
@@ -40,11 +51,16 @@ export default {
     CButton,
     CCard,
     CForm,
+    CModal,
+    Header,
+    TaskContent,
+    Container,
   },
 
   data() {
     return {
       formTask: Object.assign({}, defaultFormTask),
+      visibleModal: false,
     };
   },
 
@@ -58,7 +74,7 @@ export default {
     addTask() {
       this.formTask.id = this.generateRandomId();
       this.$store.commit("addTask", this.formTask);
-      this.cleanTaskForm();
+      this.closeModal();
     },
     removeTask(taskId) {
       this.$store.commit("removeTask", taskId);
@@ -68,6 +84,10 @@ export default {
     },
     generateRandomId() {
       return (Math.random() + 1).toString(36).substring(7);
+    },
+    closeModal() {
+      this.cleanTaskForm();
+      this.visibleModal = false;
     },
   },
 };

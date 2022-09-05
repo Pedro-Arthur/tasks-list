@@ -7,7 +7,7 @@
 <script>
 import { ThemeProvider } from "vue-styled-components";
 import theme from "./theme/theme";
-import IndexPage from "./pages/index.vue";
+import IndexPage from "./pages/Index/index.vue";
 
 export default {
   name: "App",

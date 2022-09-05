@@ -1,7 +1,5 @@
 <template>
-  <FormWrapper @submit.prevent="$emit('submit')">
-    <FormTitle>Nova tarefa</FormTitle>
-
+  <form @submit.prevent="$emit('submit')">
     <InputWrapper
       placeholder="Descrição"
       :value="value.description"
@@ -26,21 +24,19 @@
     />
 
     <CButton type="submit" icon="plus" text="Adicionar" />
-  </FormWrapper>
+  </form>
 </template>
 
 <script>
 import CButton from "../Button";
-import { FormWrapper, InputWrapper, FormTitle } from "./style";
+import { InputWrapper } from "./style";
 
 export default {
   name: "CForm",
 
   components: {
     CButton,
-    FormWrapper,
     InputWrapper,
-    FormTitle,
   },
 
   props: {
