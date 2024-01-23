@@ -92,4 +92,26 @@ describe("button", () => {
 
     expect(buttonComponent.emitted().click).toBeTruthy();
   })
+
+  it("should show the icon if the icon prop is different from null", () => {
+    const wrapper = mount(ThemeProvider, {
+      propsData: {
+        theme,
+      },
+      slots: {
+        default: {
+          render: (createElement) => {
+            return createElement(Button, {
+              props: {
+                icon: "trash-can-outline"
+              }
+            });
+          },
+        },
+      },
+    });
+
+    const buttonComponent = wrapper.findComponent(Button);
+    expect(buttonComponent.findAll("svg").wrappers.length).toBe(1);
+  })
 });

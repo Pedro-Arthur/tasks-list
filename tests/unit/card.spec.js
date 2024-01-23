@@ -64,6 +64,6 @@ describe("card", () => {
     expect(wrapper.findComponent(CardTitle).exists()).toBeTruthy();
     expect(wrapper.findComponent(CardLine).exists()).toBeTruthy();
     expect(wrapper.findAll("p").wrappers.length).toBe(2);
-    expect(wrapper.findAll("span").wrappers.length).toBe(2); // mdi icons
+    expect(wrapper.findAll("svg").wrappers.length).toBe(2); // mdi icons
   });
 });
