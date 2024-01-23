@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="$emit('submit')">
     <InputWrapper
+      type="text"
       placeholder="Descrição"
       :value="value.description"
       @input="(v) => input(v, 'description')"
