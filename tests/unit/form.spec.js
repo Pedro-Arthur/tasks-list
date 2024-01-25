@@ -2,10 +2,10 @@ import { mount } from "@vue/test-utils";
 
 import Form from "../../src/components/Form";
 
-import theme from '../../src/theme/theme';
+import theme from "../../src/theme/theme";
 import { ThemeProvider } from "vue-styled-components";
 
-import localVue from '../localVue';
+import localVue from "../localVue";
 
 describe("form", () => {
   it("should be a vue instance", () => {
@@ -20,11 +20,11 @@ describe("form", () => {
             return createElement(Form, {
               props: {
                 value: {
-                  description: '',
-                  date: '',
-                  hour: ''
-                }
-              }
+                  description: "",
+                  date: "",
+                  hour: "",
+                },
+              },
             });
           },
         },
@@ -46,11 +46,11 @@ describe("form", () => {
             return createElement(Form, {
               props: {
                 value: {
-                  description: '',
-                  date: '',
-                  hour: ''
-                }
-              }
+                  description: "",
+                  date: "",
+                  hour: "",
+                },
+              },
             });
           },
         },
@@ -76,24 +76,24 @@ describe("form", () => {
             return createElement(Form, {
               props: {
                 value: {
-                  description: '',
-                  date: '',
-                  hour: ''
-                }
-              }
+                  description: "",
+                  date: "",
+                  hour: "",
+                },
+              },
             });
           },
         },
       },
     });
 
-    await wrapper.find("input[type='text']").setValue('Test');
-    await wrapper.find("input[type='date']").setValue('2024-01-23');
-    await wrapper.find("input[type='time']").setValue('12:00');
+    await wrapper.find("input[type='text']").setValue("Test");
+    await wrapper.find("input[type='date']").setValue("2024-01-23");
+    await wrapper.find("input[type='time']").setValue("12:00");
 
-    expect(wrapper.find("input[type='text']").element.value).toBe('Test');
-    expect(wrapper.find("input[type='date']").element.value).toBe('2024-01-23');
-    expect(wrapper.find("input[type='time']").element.value).toBe('12:00');
+    expect(wrapper.find("input[type='text']").element.value).toBe("Test");
+    expect(wrapper.find("input[type='date']").element.value).toBe("2024-01-23");
+    expect(wrapper.find("input[type='time']").element.value).toBe("12:00");
   });
 
   it("should emit a submit event on form submission", async () => {
@@ -108,24 +108,27 @@ describe("form", () => {
             return createElement(Form, {
               props: {
                 value: {
-                  description: '',
-                  date: '',
-                  hour: ''
-                }
-              }
+                  description: "",
+                  date: "",
+                  hour: "",
+                },
+              },
             });
           },
         },
       },
     });
 
-    await wrapper.find("input[type='text']").setValue('Test');
-    await wrapper.find("input[type='date']").setValue('2024-01-23');
-    await wrapper.find("input[type='time']").setValue('12:00');
+    await wrapper.find("input[type='text']").setValue("Test");
+    await wrapper.find("input[type='date']").setValue("2024-01-23");
+    await wrapper.find("input[type='time']").setValue("12:00");
 
-    await wrapper.find("button[type='submit']").trigger("click");
+    const form = wrapper.findComponent(Form).find("form");
 
-    // TODO: Não está funcionando...
-    expect(wrapper.find('form').emitted().submit).toBeTruthy();
+    expect(form.exists()).toBe(true);
+
+    await form.trigger("submit.prevent");
+
+    expect(form.emitted().submit).toBeTruthy();
   });
 });

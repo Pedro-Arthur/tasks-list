@@ -1,12 +1,12 @@
 import { mount } from "@vue/test-utils";
 
 import { ThemeProvider } from "vue-styled-components";
-import theme from '../../src/theme/theme';
+import theme from "../../src/theme/theme";
 
 import Button from "../../src/components/Button";
 import { ButtonWrapper } from "../../src/components/Button/style";
 
-import localVue from '../localVue';
+import localVue from "../localVue";
 
 describe("button", () => {
   it("should be a vue instance", () => {
@@ -40,8 +40,8 @@ describe("button", () => {
           render: (createElement) => {
             return createElement(Button, {
               props: {
-                text: buttonText
-              }
+                text: buttonText,
+              },
             });
           },
         },
@@ -49,7 +49,7 @@ describe("button", () => {
     });
 
     const buttonComponent = wrapper.findComponent(Button);
-    expect(buttonComponent.props('text')).toBe(buttonText);
+    expect(buttonComponent.props("text")).toBe(buttonText);
   });
 
   it("should have the correct color", () => {
@@ -65,8 +65,8 @@ describe("button", () => {
           render: (createElement) => {
             return createElement(Button, {
               props: {
-                color: buttonColor
-              }
+                color: buttonColor,
+              },
             });
           },
         },
@@ -74,7 +74,7 @@ describe("button", () => {
     });
 
     const buttonComponent = wrapper.findComponent(Button);
-    expect(buttonComponent.props('color')).toBe(buttonColor);
+    expect(buttonComponent.props("color")).toBe(buttonColor);
   });
 
   it("should emit click event on click", async () => {
@@ -87,7 +87,7 @@ describe("button", () => {
         default: {
           render: (createElement) => {
             return createElement(Button, {
-              props: {}
+              props: {},
             });
           },
         },
@@ -96,10 +96,10 @@ describe("button", () => {
 
     const buttonComponent = wrapper.findComponent(Button);
     const buttonWrapperComponent = buttonComponent.findComponent(ButtonWrapper);
-    await buttonWrapperComponent.trigger('click');
+    await buttonWrapperComponent.trigger("click");
 
     expect(buttonComponent.emitted().click).toBeTruthy();
-  })
+  });
 
   it("should show the icon if the icon prop is different from null", () => {
     const wrapper = mount(ThemeProvider, {
@@ -112,8 +112,8 @@ describe("button", () => {
           render: (createElement) => {
             return createElement(Button, {
               props: {
-                icon: "trash-can-outline"
-              }
+                icon: "trash-can-outline",
+              },
             });
           },
         },
@@ -122,5 +122,5 @@ describe("button", () => {
 
     const buttonComponent = wrapper.findComponent(Button);
     expect(buttonComponent.findAll("svg").wrappers.length).toBe(1);
-  })
+  });
 });

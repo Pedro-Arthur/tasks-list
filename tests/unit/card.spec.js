@@ -1,9 +1,13 @@
 import { mount } from "@vue/test-utils";
 
 import Card from "../../src/components/Card";
-import { CardLine, CardTitle, CardWrapper } from "../../src/components/Card/style";
+import {
+  CardLine,
+  CardTitle,
+  CardWrapper,
+} from "../../src/components/Card/style";
 
-import localVue from '../localVue';
+import localVue from "../localVue";
 
 describe("card", () => {
   it("should be a vue instance", () => {
@@ -24,7 +28,9 @@ describe("card", () => {
   it("should throw an error if task prop is not provided", () => {
     let error;
 
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
 
     try {
       mount(Card, {
@@ -38,7 +44,9 @@ describe("card", () => {
     }
 
     expect(error).toBeDefined();
-    expect(error.message.startsWith("Cannot read properties of undefined")).toBe(true);
+    expect(
+      error.message.startsWith("Cannot read properties of undefined")
+    ).toBe(true);
   });
 
   it("should format the date correctly", () => {
