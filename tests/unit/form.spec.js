@@ -108,9 +108,9 @@ describe("form", () => {
             return createElement(Form, {
               props: {
                 value: {
-                  description: "",
-                  date: "",
-                  hour: "",
+                  description: "Test",
+                  date: "2024-01-23",
+                  hour: "12:00",
                 },
               },
             });
@@ -118,10 +118,6 @@ describe("form", () => {
         },
       },
     });
-
-    await wrapper.find("input[type='text']").setValue("Test");
-    await wrapper.find("input[type='date']").setValue("2024-01-23");
-    await wrapper.find("input[type='time']").setValue("12:00");
 
     const form = wrapper.findComponent(Form).find("form");
 
