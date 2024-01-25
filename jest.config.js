@@ -1,4 +1,8 @@
 module.exports = {
+  testMatch: [
+    '<rootDir>/tests/unit/**/*.spec.js',
+    '<rootDir>/tests/integration/**/*.spec.js'
+  ],
   moduleFileExtensions: [
     "js",
     "json",

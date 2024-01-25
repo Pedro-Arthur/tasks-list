@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "npx jest ./tests/unit",
+    "test:integration": "npx jest ./tests/integration",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -51,7 +52,8 @@
       {
         "files": [
           "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+          "**/tests/unit/**/*.spec.{j,t}s?(x)",
+          "**/tests/integration/**/*.spec.{j,t}s?(x)"
         ],
         "env": {
           "jest": true
