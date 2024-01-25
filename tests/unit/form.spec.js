@@ -2,10 +2,12 @@ import { mount } from "@vue/test-utils";
 import Form from "../../src/components/Form";
 import theme from '../../src/theme/theme';
 import { ThemeProvider } from "vue-styled-components";
+import localVue from '../localVue';
 
 describe("form", () => {
   it("should be a vue instance", () => {
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },
@@ -31,6 +33,7 @@ describe("form", () => {
 
   it("should render the form with input fields and submit button", () => {
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },
@@ -60,6 +63,7 @@ describe("form", () => {
 
   it("should bind input values to the component's state", async () => {
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },
@@ -91,6 +95,7 @@ describe("form", () => {
 
   it("should emit a submit event on form submission", async () => {
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },

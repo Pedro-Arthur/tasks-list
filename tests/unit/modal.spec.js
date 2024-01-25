@@ -1,10 +1,12 @@
 import { mount } from "@vue/test-utils";
 import Modal from "../../src/components/Modal";
 import { ModalClose } from "../../src/components/Modal/style";
+import localVue from '../localVue';
 
 describe("modal", () => {
   it("should be a vue instance", () => {
     const wrapper = mount(Modal, {
+      localVue,
       propsData: {
         title: "teste"
       },
@@ -17,6 +19,7 @@ describe("modal", () => {
     const modalTitle = "Teste";
 
     const wrapper = mount(Modal, {
+      localVue,
       propsData: {
         title: modalTitle
       },
@@ -28,6 +31,7 @@ describe("modal", () => {
 
   it("should emit close event on click", async () => {
     const wrapper = mount(Modal, {
+      localVue,
       propsData: {
         title: "teste"
       },

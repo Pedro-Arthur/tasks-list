@@ -3,10 +3,12 @@ import Button from "../../src/components/Button";
 import { ThemeProvider } from "vue-styled-components";
 import theme from '../../src/theme/theme';
 import { ButtonWrapper } from "../../src/components/Button/style";
+import localVue from '../localVue';
 
 describe("button", () => {
   it("should be a vue instance", () => {
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },
@@ -26,6 +28,7 @@ describe("button", () => {
     const buttonText = "Texto botão";
 
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },
@@ -50,6 +53,7 @@ describe("button", () => {
     const buttonColor = "success";
 
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },
@@ -72,6 +76,7 @@ describe("button", () => {
 
   it("should emit click event on click", async () => {
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },
@@ -95,6 +100,7 @@ describe("button", () => {
 
   it("should show the icon if the icon prop is different from null", () => {
     const wrapper = mount(ThemeProvider, {
+      localVue,
       propsData: {
         theme,
       },

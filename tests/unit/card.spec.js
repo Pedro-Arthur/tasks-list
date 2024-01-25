@@ -1,10 +1,12 @@
 import { mount } from "@vue/test-utils";
 import Card from "../../src/components/Card";
 import { CardLine, CardTitle, CardWrapper } from "../../src/components/Card/style";
+import localVue from '../localVue';
 
 describe("card", () => {
   it("should be a vue instance", () => {
     const wrapper = mount(Card, {
+      localVue,
       propsData: {
         task: {
           description: "test",
@@ -24,6 +26,7 @@ describe("card", () => {
 
     try {
       mount(Card, {
+        localVue,
         propsData: {},
       });
     } catch (e) {
@@ -38,6 +41,7 @@ describe("card", () => {
 
   it("should format the date correctly", () => {
     const wrapper = mount(Card, {
+      localVue,
       propsData: {
         task: {
           description: "test",
@@ -51,6 +55,7 @@ describe("card", () => {
 
   it("should render the correct DOM structure", () => {
     const wrapper = mount(Card, {
+      localVue,
       propsData: {
         task: {
           description: "test",
