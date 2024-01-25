@@ -3,6 +3,7 @@
     <Header>
       <h1>Tarefas</h1>
       <CButton
+        ref="add-button"
         icon="plus"
         @click="visibleModal = true"
         text="Adicionar"
@@ -10,7 +11,7 @@
       />
     </Header>
 
-    <CModal v-if="visibleModal" @close="closeModal" title="Adicionar tarefa">
+    <CModal ref="add-modal" v-if="visibleModal" @close="closeModal" title="Adicionar tarefa">
       <CForm v-model="formTask" @submit="addTask" />
     </CModal>
 
@@ -18,6 +19,7 @@
       <CCard v-for="task in tasks" :key="task.id" :task="task">
         <template v-slot:actions>
           <CButton
+            ref="delete-button"
             icon="trash-can-outline"
             @click="removeTask(task.id)"
             text="Apagar"

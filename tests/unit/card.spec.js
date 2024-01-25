@@ -1,6 +1,8 @@
 import { mount } from "@vue/test-utils";
+
 import Card from "../../src/components/Card";
 import { CardLine, CardTitle, CardWrapper } from "../../src/components/Card/style";
+
 import localVue from '../localVue';
 
 describe("card", () => {

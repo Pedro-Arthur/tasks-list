@@ -1,8 +1,11 @@
 import { mount } from "@vue/test-utils";
-import Button from "../../src/components/Button";
+
 import { ThemeProvider } from "vue-styled-components";
 import theme from '../../src/theme/theme';
+
+import Button from "../../src/components/Button";
 import { ButtonWrapper } from "../../src/components/Button/style";
+
 import localVue from '../localVue';
 
 describe("button", () => {

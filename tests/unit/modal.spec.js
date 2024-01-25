@@ -1,6 +1,8 @@
 import { mount } from "@vue/test-utils";
+
 import Modal from "../../src/components/Modal";
 import { ModalClose } from "../../src/components/Modal/style";
+
 import localVue from '../localVue';
 
 describe("modal", () => {

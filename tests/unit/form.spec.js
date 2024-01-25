@@ -1,7 +1,10 @@
 import { mount } from "@vue/test-utils";
+
 import Form from "../../src/components/Form";
+
 import theme from '../../src/theme/theme';
 import { ThemeProvider } from "vue-styled-components";
+
 import localVue from '../localVue';
 
 describe("form", () => {
