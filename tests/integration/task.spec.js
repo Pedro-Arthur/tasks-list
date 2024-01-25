@@ -1,3 +1,10 @@
+import { mount } from "@vue/test-utils";
+import Button from "../../src/components/Button";
+import Modal from "../../src/components/Modal";
+import { ThemeProvider } from "vue-styled-components";
+import theme from '../../src/theme/theme';
+import IndexPage from "../../src/pages/Index/index.vue";
+
 describe("task", () => {
   it("should show message 'Sem tarefas cadastradas...' if the number of tasks in the store is 0", () => {
 
@@ -8,6 +15,23 @@ describe("task", () => {
   })
 
   it("should show modal when add button is clicked", () => {
-    
+    const wrapper = mount(ThemeProvider, {
+      propsData: {
+        theme,
+      },
+      slots: {
+        default: {
+          render: (createElement) => {
+            return createElement(IndexPage);
+          },
+        },
+      },
+    });
+
+    const buttonComponent = wrapper.findComponent(Button);
+    const modalComponent = wrapper.findComponent(Modal);
+
+    expect(buttonComponent).toBeTruthy();
+    expect(modalComponent).toBeTruthy();
   })
 });
