@@ -11,12 +11,12 @@
       />
     </Header>
 
-    <CModal ref="add-modal" v-if="visibleModal" @close="closeModal" title="Adicionar tarefa">
+    <CModal v-if="visibleModal" @close="closeModal" ref="add-modal" title="Adicionar tarefa">
       <CForm v-model="formTask" @submit="addTask" />
     </CModal>
 
     <TaskContent v-if="tasks.length > 0">
-      <CCard v-for="task in tasks" :key="task.id" :task="task">
+      <CCard v-for="task in tasks" :key="task.id" :task="task" ref="task-card">
         <template v-slot:actions>
           <CButton
             ref="delete-button"
@@ -28,7 +28,7 @@
         </template>
       </CCard>
     </TaskContent>
-    <p v-else>Sem tarefas cadastradas...</p>
+    <p v-else ref="empty-text">Sem tarefas cadastradas...</p>
   </Container>
 </template>
 
