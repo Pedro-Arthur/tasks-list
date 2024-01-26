@@ -88,6 +88,8 @@ describe("task", () => {
 
     await wrapper.vm.$nextTick();
 
+    expect(store.getters.getTasks.length).toBe(7);
+
     const taskCardsAfter = wrapper
       .findComponent(IndexPage)
       .findAllComponents({ ref: "task-card" });
