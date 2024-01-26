@@ -1,4 +1,4 @@
-const localStorageKey = "tasks";
+export const localStorageKey = "tasks";
 
 const storeTasks = (tasks) => {
   localStorage.setItem(localStorageKey, JSON.stringify(tasks));
@@ -7,6 +7,10 @@ const storeTasks = (tasks) => {
 const getStoredTasks = () => {
   const storedTasks = JSON.parse(localStorage.getItem(localStorageKey));
   return storedTasks || [];
+};
+
+const cleanStoredTasks = () => {
+  localStorage.removeItem(localStorageKey);
 };
 
 export default {
@@ -25,9 +29,15 @@ export default {
       state.tasks.push(task);
       storeTasks(state.tasks);
     },
+
     removeTask(state, taskId) {
       state.tasks = state.tasks.filter((task) => task.id !== taskId);
       storeTasks(state.tasks);
+    },
+
+    cleanTasks(state) {
+      state.tasks = [];
+      cleanStoredTasks();
     },
   },
 };
