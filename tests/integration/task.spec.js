@@ -161,4 +161,127 @@ describe("task", () => {
       .findComponent({ ref: "add-modal" });
     expect(addModalAfter.exists()).toBe(true);
   });
+
+  it("should add an item to storage and store when the form is submitted", async () => {
+    const wrapper = mount(ThemeProvider, {
+      localVue,
+      store,
+      propsData: {
+        theme,
+      },
+      slots: {
+        default: {
+          render: (createElement) => {
+            return createElement(IndexPage);
+          },
+        },
+      },
+    });
+
+    const addButton = wrapper
+      .findComponent(IndexPage)
+      .findComponent({ ref: "add-button" });
+
+    expect(addButton.exists()).toBe(true);
+
+    await addButton.trigger("click");
+
+    const addModal = wrapper
+      .findComponent(IndexPage)
+      .findComponent({ ref: "add-modal" });
+
+    expect(addModal.exists()).toBe(true);
+
+    const addForm = wrapper
+      .findComponent(IndexPage)
+      .findComponent({ ref: "add-form" });
+
+    expect(addForm.exists()).toBe(true);
+
+    const descriptionInput = addForm.find("input[type='text']");
+    const dateInput = addForm.find("input[type='date']");
+    const timeInput = addForm.find("input[type='time']");
+    const submitButton = addForm.find("button[type='submit']");
+
+    expect(descriptionInput.exists()).toBe(true);
+    expect(dateInput.exists()).toBe(true);
+    expect(timeInput.exists()).toBe(true);
+    expect(submitButton.exists()).toBe(true);
+
+    await descriptionInput.setValue("Teste 123");
+    await dateInput.setValue("2024-01-27");
+    await timeInput.setValue("15:00");
+
+    await submitButton.trigger("click");
+
+    const addFormChild = addForm.find("form");
+
+    await addFormChild.trigger("submit.prevent");
+
+    await wrapper.vm.$nextTick();
+
+    const taskCards = wrapper
+      .findComponent(IndexPage)
+      .findAllComponents({ ref: "task-card" });
+
+    expect(taskCards.wrappers.length).toBe(1);
+
+    expect(store.getters.getTasks.length).toBe(1);
+
+    const tasksOnLocalStorage = JSON.parse(
+      localStorage.getItem(localStorageKey)
+    );
+
+    expect(tasksOnLocalStorage.length).toBe(1);
+  });
+
+  it("should remove an item to storage and store when the remove button is clicked", async () => {
+    for (let i = 0; i <= 1; i++) {
+      store.commit("addTask", {
+        id: i,
+        description: "teste",
+        date: "2023-05-05",
+        hour: "12:12",
+      });
+    }
+
+    const wrapper = mount(ThemeProvider, {
+      localVue,
+      store,
+      propsData: {
+        theme,
+      },
+      slots: {
+        default: {
+          render: (createElement) => {
+            return createElement(IndexPage);
+          },
+        },
+      },
+    });
+
+    const deleteButton = wrapper
+      .findComponent(IndexPage)
+      .findComponent({ ref: "delete-button" });
+
+    expect(deleteButton.exists()).toBe(true);
+
+    await deleteButton.trigger("click");
+
+    await wrapper.vm.$nextTick();
+
+    const taskCards = wrapper
+      .findComponent(IndexPage)
+      .findAllComponents({ ref: "task-card" });
+
+    expect(taskCards.wrappers.length).toBe(1);
+
+    expect(store.getters.getTasks.length).toBe(1);
+
+    const tasksOnLocalStorage = JSON.parse(
+      localStorage.getItem(localStorageKey)
+    );
+
+    expect(tasksOnLocalStorage.length).toBe(1);
+  });
 });

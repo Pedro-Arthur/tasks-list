@@ -12,7 +12,7 @@
     </Header>
 
     <CModal v-if="visibleModal" @close="closeModal" ref="add-modal" title="Adicionar tarefa">
-      <CForm v-model="formTask" @submit="addTask" />
+      <CForm ref="add-form" v-model="formTask" @submit="addTask" />
     </CModal>
 
     <TaskContent v-if="tasks.length > 0">
