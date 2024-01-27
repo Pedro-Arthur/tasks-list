@@ -11,26 +11,27 @@ import store from "../store";
 
 import { localStorageKey } from "../../src/store/task";
 
+const createWrapper = () =>
+  mount(ThemeProvider, {
+    localVue,
+    store,
+    propsData: {
+      theme,
+    },
+    slots: {
+      default: {
+        render: (createElement) => createElement(IndexPage),
+      },
+    },
+  });
+
 describe("task", () => {
   afterEach(() => {
     store.commit("cleanTasks");
   });
 
   it("should show message 'Sem tarefas cadastradas...' if the number of tasks in the store is 0", () => {
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      store,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(IndexPage);
-          },
-        },
-      },
-    });
+    const wrapper = createWrapper();
 
     expect(store.getters.getTasks.length).toBe(0);
 
@@ -53,20 +54,7 @@ describe("task", () => {
       });
     }
 
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      store,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(IndexPage);
-          },
-        },
-      },
-    });
+    const wrapper = createWrapper();
 
     expect(store.getters.getTasks.length).toBe(10);
 
@@ -129,20 +117,7 @@ describe("task", () => {
   });
 
   it("should show modal when add button is clicked", async () => {
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      store,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(IndexPage);
-          },
-        },
-      },
-    });
+    const wrapper = createWrapper();
 
     const addButton = wrapper
       .findComponent(IndexPage)
@@ -163,20 +138,7 @@ describe("task", () => {
   });
 
   it("should add an item to storage and store when the form is submitted", async () => {
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      store,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(IndexPage);
-          },
-        },
-      },
-    });
+    const wrapper = createWrapper();
 
     const addButton = wrapper
       .findComponent(IndexPage)
@@ -245,20 +207,7 @@ describe("task", () => {
       });
     }
 
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      store,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(IndexPage);
-          },
-        },
-      },
-    });
+    const wrapper = createWrapper();
 
     const deleteButton = wrapper
       .findComponent(IndexPage)
