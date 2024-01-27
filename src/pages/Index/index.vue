@@ -4,6 +4,7 @@
       <h1>Tarefas</h1>
       <CButton
         ref="add-button"
+        id="add-button"
         icon="plus"
         @click="visibleModal = true"
         text="Adicionar"
@@ -20,6 +21,7 @@
         <template v-slot:actions>
           <CButton
             ref="delete-button"
+            id="delete-button"
             icon="trash-can-outline"
             @click="removeTask(task.id)"
             text="Apagar"

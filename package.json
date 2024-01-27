@@ -7,6 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "npx jest ./tests/unit",
     "test:integration": "npx jest ./tests/integration",
+    "test:e2e": "npx playwright test --ui",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
