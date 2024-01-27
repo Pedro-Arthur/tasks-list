@@ -17,7 +17,7 @@
     </CModal>
 
     <TaskContent v-if="tasks.length > 0">
-      <CCard v-for="task in tasks" :key="task.id" :task="task" ref="task-card">
+      <CCard v-for="task in tasks" :key="task.id" :task="task" ref="task-card" id="task-card">
         <template v-slot:actions>
           <CButton
             ref="delete-button"
