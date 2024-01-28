@@ -26,14 +26,14 @@ test("should add and delete tasks", async ({ page }) => {
   await addTask("Teste", "2022-01-14", "11:00");
   await addTask("Teste 2", "2023-05-18", "08:00");
 
-  const taskCards = await page.$$("#task-card");
+  const taskCardsBefore = await page.$$("#task-card");
 
-  expect(taskCards.length).toBe(2);
+  expect(taskCardsBefore.length).toBe(2);
 
   const taskDescriptions = ["Teste", "Teste 2"];
 
-  for (let i = 0; i < taskCards.length; i++) {
-    const hasH3Element = await taskCards[i].$eval(
+  for (let i = 0; i < taskCardsBefore.length; i++) {
+    const hasH3Element = await taskCardsBefore[i].$eval(
       "h3",
       (h3Element, targetText) => h3Element.textContent.includes(targetText),
       taskDescriptions[i]
@@ -41,4 +41,10 @@ test("should add and delete tasks", async ({ page }) => {
 
     expect(hasH3Element).toBeTruthy();
   }
+
+  await clickIfExists('button[id="delete-button"]');
+
+  const taskCardsAfter = await page.$$("#task-card");
+
+  expect(taskCardsAfter.length).toBe(1);
 });
