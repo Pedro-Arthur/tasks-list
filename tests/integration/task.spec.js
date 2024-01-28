@@ -25,6 +25,23 @@ const createWrapper = () =>
     },
   });
 
+const addTasksToStore = (count) => {
+  for (let i = 0; i < count; i++) {
+    store.commit("addTask", {
+      id: i,
+      description: "teste",
+      date: "2023-05-05",
+      hour: "12:12",
+    });
+  }
+};
+
+const removeTasksFromStore = (count) => {
+  for (let i = 0; i < count; i++) {
+    store.commit("removeTask", i);
+  }
+};
+
 describe("task", () => {
   afterEach(() => {
     store.commit("cleanTasks");
@@ -45,14 +62,7 @@ describe("task", () => {
   });
 
   it("should show the same number of tasks in the store and in the DOM", async () => {
-    for (let i = 0; i <= 9; i++) {
-      store.commit("addTask", {
-        id: i,
-        description: "teste",
-        date: "2023-05-05",
-        hour: "12:12",
-      });
-    }
+    addTasksToStore(10);
 
     const wrapper = createWrapper();
 
@@ -70,9 +80,7 @@ describe("task", () => {
 
     expect(taskCardsBefore.wrappers.length).toBe(10);
 
-    for (let i = 0; i <= 2; i++) {
-      store.commit("removeTask", i);
-    }
+    removeTasksFromStore(3);
 
     await wrapper.vm.$nextTick();
 
@@ -86,14 +94,7 @@ describe("task", () => {
   });
 
   it("should show the same number of tasks in the store and in the local storage", () => {
-    for (let i = 0; i <= 5; i++) {
-      store.commit("addTask", {
-        id: i,
-        description: "teste",
-        date: "2023-05-05",
-        hour: "12:12",
-      });
-    }
+    addTasksToStore(6);
 
     expect(store.getters.getTasks.length).toBe(6);
 
@@ -103,9 +104,7 @@ describe("task", () => {
 
     expect(tasksOnLocalStorageBefore.length).toBe(6);
 
-    for (let i = 0; i <= 3; i++) {
-      store.commit("removeTask", i);
-    }
+    removeTasksFromStore(4);
 
     expect(store.getters.getTasks.length).toBe(2);
 
@@ -198,14 +197,7 @@ describe("task", () => {
   });
 
   it("should remove an item to storage and store when the remove button is clicked", async () => {
-    for (let i = 0; i <= 1; i++) {
-      store.commit("addTask", {
-        id: i,
-        description: "teste",
-        date: "2023-05-05",
-        hour: "12:12",
-      });
-    }
+    addTasksToStore(2);
 
     const wrapper = createWrapper();
 
