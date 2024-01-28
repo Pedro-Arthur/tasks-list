@@ -7,27 +7,26 @@ import { ThemeProvider } from "vue-styled-components";
 
 import localVue from "../localVue";
 
+const mountFormWithProps = (props) =>
+  mount(ThemeProvider, {
+    localVue,
+    propsData: {
+      theme,
+    },
+    slots: {
+      default: {
+        render: (createElement) => createElement(Form, { props }),
+      },
+    },
+  });
+
 describe("form", () => {
   it("should be a vue instance", () => {
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(Form, {
-              props: {
-                value: {
-                  description: "",
-                  date: "",
-                  hour: "",
-                },
-              },
-            });
-          },
-        },
+    const wrapper = mountFormWithProps({
+      value: {
+        description: "",
+        date: "",
+        hour: "",
       },
     });
 
@@ -35,25 +34,11 @@ describe("form", () => {
   });
 
   it("should render the form with input fields and submit button", () => {
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(Form, {
-              props: {
-                value: {
-                  description: "",
-                  date: "",
-                  hour: "",
-                },
-              },
-            });
-          },
-        },
+    const wrapper = mountFormWithProps({
+      value: {
+        description: "",
+        date: "",
+        hour: "",
       },
     });
 
@@ -65,25 +50,11 @@ describe("form", () => {
   });
 
   it("should bind input values to the component's state", async () => {
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(Form, {
-              props: {
-                value: {
-                  description: "",
-                  date: "",
-                  hour: "",
-                },
-              },
-            });
-          },
-        },
+    const wrapper = mountFormWithProps({
+      value: {
+        description: "",
+        date: "",
+        hour: "",
       },
     });
 
@@ -97,25 +68,11 @@ describe("form", () => {
   });
 
   it("should emit a submit event on form submission", async () => {
-    const wrapper = mount(ThemeProvider, {
-      localVue,
-      propsData: {
-        theme,
-      },
-      slots: {
-        default: {
-          render: (createElement) => {
-            return createElement(Form, {
-              props: {
-                value: {
-                  description: "Test",
-                  date: "2024-01-23",
-                  hour: "12:00",
-                },
-              },
-            });
-          },
-        },
+    const wrapper = mountFormWithProps({
+      value: {
+        description: "Test",
+        date: "2024-01-23",
+        hour: "12:00",
       },
     });
 
